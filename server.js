@@ -6,13 +6,6 @@ const schema = require('./schema');
 // INITIALIZE EXPRESS
 const app = express();
 
-// GRAB DATA
-let customers = [];
-axios
-  .get('https://jsonplaceholder.typicode.com/users')
-  .then(res => (customers = res.data))
-  .catch(error => console.log(error));
-
 // ROUTES
 app.use(
   '/graphql',
