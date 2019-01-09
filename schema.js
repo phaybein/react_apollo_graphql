@@ -8,14 +8,16 @@ const {
   GraphQLSchema
 } = require('graphql');
 
-const Axios = require('axios');
+const axios = require('axios');
 
+/*
 // HARDCODED DATA
 const customers = [
   { id: '1', name: 'John Doe', email: 'jdoe@test.com', age: 35 },
   { id: '2', name: 'Steve Smith', email: 'ssmith@test.com', age: 25 },
   { id: '3', name: 'Erika Cruz', email: 'ecruz@test.com', age: 31 }
 ];
+*/
 
 // CUSTOMER TYPE
 const CustomerType = new GraphQLObjectType({
@@ -30,7 +32,7 @@ const CustomerType = new GraphQLObjectType({
 
 // ROOT QUERY
 const RootQuery = new GraphQLObjectType({
-  name: 'TootQueryType',
+  name: 'RootQueryType',
   fields: {
     customer: {
       type: CustomerType,
@@ -38,11 +40,17 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLString }
       },
       resolve(parentValue, args) {
+        /* FOR HARD CODED DATA
         for (let i = 0; i < customers.length; i++) {
           if (customers[i].id === args.id) {
             return customers[i];
           }
         }
+        */
+
+        return axios
+          .get(`http://localhost:3000/customers/${args.id}`)
+          .then(res => res.data);
       }
     },
     customers: {
