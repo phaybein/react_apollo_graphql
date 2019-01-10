@@ -1,0 +1,32 @@
+.customer__card {
+  border-bottom: 1px dotted #ccc;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .card {
+    &__body {
+      flex: 2;
+      h1 {
+      }
+
+      p {
+      }
+
+      small {
+        color: #ccc;
+      }
+    }
+
+    &__footer {
+      flex: 1;
+      button {
+        cursor: pointer;
+      }
+    }
+  }
+}

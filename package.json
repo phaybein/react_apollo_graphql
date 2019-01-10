@@ -5,10 +5,11 @@
   "main": "server.js",
   "scripts": {
     "client-install": "cd client && npm install",
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "json:server": "json-server --watch data.json"
+    "json:server": "json-server --watch data.json --port 8080"
   },
   "keywords": [],
   "author": "Mauro Fabian Martinez",
@@ -16,6 +17,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",

@@ -10,15 +10,6 @@ const {
 
 const axios = require('axios');
 
-/*
-// HARDCODED DATA
-const customers = [
-  { id: '1', name: 'John Doe', email: 'jdoe@test.com', age: 35 },
-  { id: '2', name: 'Steve Smith', email: 'ssmith@test.com', age: 25 },
-  { id: '3', name: 'Erika Cruz', email: 'ecruz@test.com', age: 31 }
-];
-*/
-
 // CUSTOMER TYPE
 const CustomerType = new GraphQLObjectType({
   name: 'Customer',
@@ -40,16 +31,8 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLString }
       },
       resolve(parentValue, args) {
-        /* FOR HARD CODED DATA
-        for (let i = 0; i < customers.length; i++) {
-          if (customers[i].id === args.id) {
-            return customers[i];
-          }
-        }
-        */
-
         return axios
-          .get(`http://localhost:3000/customers/${args.id}`)
+          .get(`http://localhost:8080/customers/${args.id}`)
           .then(res => res.data);
       }
     },
@@ -57,7 +40,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CustomerType),
       resolve(parentValue, args) {
         return axios
-          .get(`http://localhost:3000/customers`)
+          .get(`http://localhost:8080/customers`)
           .then(res => res.data);
       }
     }
@@ -83,7 +66,7 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return axios
-          .post(`http://localhost:3000/customers`, {
+          .post(`http://localhost:8080/customers`, {
             name: args.email,
             email: args.email,
             age: args.age
@@ -100,7 +83,7 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return axios
-          .delete(`http://localhost:3000/customers/${args.id}`)
+          .delete(`http://localhost:8080/customers/${args.id}`)
           .then(res => res.data);
       }
     },
@@ -122,7 +105,7 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args) {
         return axios
-          .patch(`http://localhost:3000/customers/${args.id}`, args)
+          .patch(`http://localhost:8080/customers/${args.id}`, args)
           .then(res => res.data);
       }
     }
